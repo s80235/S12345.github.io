@@ -1,0 +1,305 @@
+Here is the updated, production-ready code. I have applied the **Deep Ocean Blue** theme (inspired by the UMT maritime identity), updated your personal details, and adjusted the styling to reflect "Year 1" status.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Afiq Iskandar | Food Science Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS VARIABLES & THEME --- */
+        :root {
+            --bg-color: #F0F5F9;       /* Light Ocean Mist */
+            --card-bg: #FFFFFF;        /* Pure White */
+            --text-main: #0F172A;      /* Deep Navy (almost black) */
+            --text-muted: #64748B;     /* Slate Grey */
+            
+            /* THEME: UMT Deep Ocean Blue */
+            --accent: #00305B;         /* UMT Deep Blue */
+            --accent-gradient: linear-gradient(135deg, #00305B 0%, #005691 100%);
+            --accent-soft: #E0F2FE;    /* Pale Water Blue */
+            --accent-text: #0EA5E9;    /* Brighter Blue for small highlights */
+            
+            --border-radius: 24px;
+            --gap: 16px;
+            --shadow: 0 4px 20px -2px rgba(0, 48, 91, 0.08); /* Subtle blue tinted shadow */
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- THE BENTO GRID --- */
+        .bento-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--gap);
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        /* Desktop Grid Configuration */
+        @media (min-width: 768px) {
+            .bento-container {
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: repeat(3, minmax(160px, auto));
+            }
+
+            .card-profile { grid-column: span 2; grid-row: span 2; }
+            .card-location { grid-column: span 1; grid-row: span 1; }
+            .card-hobby { grid-column: span 1; grid-row: span 1; }
+            .card-stack { grid-column: span 1; grid-row: span 2; }
+            .card-case { grid-column: span 2; grid-row: span 1; }
+            .card-playlist { grid-column: span 2; grid-row: span 1; }
+        }
+
+        /* --- CARD STYLING --- */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -4px rgba(0, 48, 91, 0.15);
+        }
+
+        h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; color: var(--text-main); line-height: 1.2; }
+        h3 { font-size: 0.75rem; font-weight: 600; color: var(--accent-text); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
+        p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; }
+        
+        .pill {
+            display: inline-block;
+            background: var(--bg-color);
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 4px;
+            margin-bottom: 4px;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: 0.2s;
+        }
+        .icon-btn:hover { background: var(--accent); color: white; }
+
+        /* --- SPECIFIC CARD STYLES --- */
+        
+        /* 1. Profile */
+        .card-profile { justify-content: flex-end; }
+        .profile-img-placeholder {
+            width: 80px; height: 80px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 10px rgba(0, 48, 91, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        .tagline { font-style: italic; color: var(--accent); font-size: 0.95rem; margin-bottom: 12px; display: block; font-weight: 500;}
+        .social-links { display: flex; gap: 8px; margin-top: 16px; }
+        .status-badge {
+            background: var(--accent-soft);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        /* 2. Location */
+        .card-location { 
+            background: var(--accent-gradient); 
+            color: white; 
+        }
+        .card-location h3 { color: #BAE6FD; opacity: 0.9; }
+        .time-display { font-size: 2rem; font-weight: 300; letter-spacing: -1px; }
+        .campus-tag { display: flex; align-items: center; gap: 6px; margin-top: auto; color: #E0F2FE; font-size: 0.85rem;}
+
+        /* 3. Tech Stack */
+        .stack-list { display: flex; flex-direction: column; gap: 8px; }
+        .stack-item {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--bg-color);
+        }
+        .stack-item span { font-size: 0.9rem; font-weight: 500; }
+        .grade { color: var(--accent); font-weight: 700; font-size: 0.8rem; background: var(--accent-soft); padding: 2px 8px; border-radius: 4px;}
+
+        /* 4. Case Study */
+        .card-case { background: white; border-left: 4px solid var(--accent); }
+        .case-desc { margin-top: 4px; font-size: 0.9rem; }
+        .case-meta { display: flex; gap: 8px; margin-top: 12px; }
+
+        /* 5. Hobby */
+        .hobby-icon { font-size: 2.2rem; margin-bottom: 8px; }
+
+        /* 6. Playlist */
+        .card-playlist { 
+            background: #0F172A; 
+            color: white; 
+            flex-direction: row; 
+            align-items: center;
+            gap: 16px;
+        }
+        .album-art { width: 48px; height: 48px; background: #334155; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;}
+        .song-info { flex-grow: 1; }
+        .song-info h4 { font-size: 0.95rem; font-weight: 600; color: white; margin: 0;}
+        .song-info span { font-size: 0.8rem; color: #94A3B8; }
+        .progress-bar {
+            width: 100%; height: 4px; background: #334155; border-radius: 2px; margin-top: 8px; overflow: hidden;
+        }
+        .progress-fill { width: 45%; height: 100%; background: #38BDF8; } /* Ocean cyan */
+        .controls { display: flex; gap: 12px; font-size: 1.2rem; color: #F1F5F9;}
+
+    </style>
+</head>
+<body>
+
+    <main class="bento-container">
+
+        <article class="card card-profile">
+            <div class="profile-img-placeholder">AI</div>
+            <div>
+                <span class="status-badge">Year 1</span>
+                <h2>AFIQ ISKANDAR<br>BIN ROSLI</h2>
+                <span class="tagline">"Innovating food safety."</span>
+                <p>B.Sc. Food Science (Hons)</p>
+                <div class="social-links">
+                    <a href="#" class="icon-btn" aria-label="LinkedIn">IN</a>
+                    <a href="#" class="icon-btn" aria-label="GitHub">GH</a>
+                    <a href="#" class="icon-btn" aria-label="UMT Portal">UM</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="card card-location">
+            <h3>Campus</h3>
+            <div class="time-display" id="clock">00:00</div>
+            <div class="campus-tag">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                <span>UMT, Kuala Nerus</span>
+            </div>
+        </article>
+
+        <article class="card card-stack">
+            <h3>Sem 1 Focus</h3>
+            <div class="stack-list">
+                <div class="stack-item">
+                    <span>Food Chemistry</span>
+                    <span class="grade">Core</span>
+                </div>
+                <div class="stack-item">
+                    <span>Microbiology</span>
+                    <span class="grade">Core</span>
+                </div>
+                <div class="stack-item">
+                    <span>Excel</span>
+                    <span class="grade">Data</span>
+                </div>
+                <div class="stack-item">
+                    <span>Lab Analysis</span>
+                    <span class="grade">Lab</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="card card-hobby">
+            <h3>Unwind</h3>
+            <div class="hobby-icon">🌅</div>
+            <h4>Pantai UMT</h4>
+            <p>Evening walks.</p>
+        </article>
+
+        <article class="card card-case">
+            <h3>Featured Research</h3>
+            <h2>Starch Gelatinization in Local Kuih</h2>
+            <p class="case-desc">Analyzing texture profiles of Kuih Lapis.</p>
+            <div class="case-meta">
+                <span class="pill">Food Tech</span>
+                <span class="pill">Rheology</span>
+            </div>
+        </article>
+
+        <article class="card card-playlist">
+            <div class="album-art">🌊</div>
+            <div class="song-info">
+                <h4>Ocean Breeze</h4>
+                <span>Deep Focus Mix</span>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+            <div class="controls">
+                <span>⏮</span>
+                <span>⏸</span>
+                <span>⏭</span>
+            </div>
+        </article>
+
+    </main>
+
+    <script>
+        // Clock script for Kuala Lumpur time (GMT+8)
+        function updateTime() {
+            const now = new Date();
+            // Force Malaysia Time
+            const timeString = now.toLocaleTimeString('en-GB', { 
+                timeZone: 'Asia/Kuala_Lumpur',
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            document.getElementById('clock').textContent = timeString;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
+</body>
+</html>
+```
